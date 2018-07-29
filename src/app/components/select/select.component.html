@@ -1,0 +1,10 @@
+<div class='select-container'>
+  {{ chosenLocalesList.length > 0 ? chosenLocalesList.join(', '): text }}
+  <i class='material-icons'>{{ shouldShowOptions ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</i>
+</div>
+
+<ul *ngIf="shouldShowOptions">
+  <li *ngFor="let option of options">
+    <app-switch [option]="option" (chosenOption)="addOption(option)" [isSelected]="isSelected(option)"></app-switch>
+  </li>
+</ul>

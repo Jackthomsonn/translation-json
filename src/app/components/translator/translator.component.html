@@ -1,0 +1,18 @@
+<div class='form'>
+  <app-select [options]="locales" [multiple]="true" text="Select locales you wish to translate to" (chosenLocales)="getChosenLocales($event)">
+  </app-select>
+
+  <label>Paste the json you wish to translate in the box below</label>
+  <textarea [(ngModel)]="jsonToTranslate"></textarea>
+
+  <div class='button-container'>
+    <app-button (click)="submitForTranslation()">
+      Translate
+      <i class='material-icons'>translate</i>
+    </app-button>
+    <app-button [isSecondary]="true" (click)="clear()">
+      Clear
+      <i class='material-icons'>clear</i>
+    </app-button>
+  </div>
+</div>

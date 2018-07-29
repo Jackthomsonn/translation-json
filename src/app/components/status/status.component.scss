@@ -1,0 +1,30 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  padding: $base-padding;
+  width: 120px;
+  justify-content: center;
+  border-radius: $border-radius;
+  text-transform: capitalize;
+
+  &.complete {
+    background: map-get($statuses, positive);
+    color: white(1);
+  }
+
+  &.in_progress {
+    background: map-get($statuses, neutral);
+    color: black(0.5);
+  }
+
+  &.failed {
+    background: map-get($statuses, negative);
+    color: white(1);
+  }
+
+  &.new {
+    background: map-get($colors, primary);
+    color: white(1);
+  }
+}

@@ -1,0 +1,4 @@
+<li *ngFor="let breadcrumb of breadcrumbs; index as i;" [routerLink]="breadcrumb.sref">
+  {{ breadcrumb.name }}
+  <i class='material-icons' *ngIf="i !== breadcrumbs?.length - 1">keyboard_arrow_right</i>
+</li>

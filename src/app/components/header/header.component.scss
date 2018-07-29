@@ -1,0 +1,17 @@
+@import '../../../globals';
+
+:host {
+  background-color: map-get($colors, primary);
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  z-index: 2;
+
+  & > h1 {
+    background: darken(map-get($colors, primary), 5%);
+    font-size: map-get($fonts, large);
+    padding: $base-padding * 2;
+    width: 300px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}

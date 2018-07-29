@@ -1,0 +1,33 @@
+@import '../../../../globals';
+
+:host {
+  display: flex;
+  margin-left: $base-margin;
+
+  & > li {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: map-get($fonts, medium);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    outline: none;
+    min-width: 90px;
+    justify-content: center;
+    
+    &:not(:last-of-type) {
+      cursor: pointer;
+    }
+
+    & > i {
+      margin-left: $base-margin;
+      margin-right: $base-margin;
+    }
+
+    &:last-of-type {
+      background: rgba(255, 255, 255, 0.9);
+      color: map-get($colors, primary);
+      border-radius: $border-radius;
+      padding: $base-padding;
+    }
+  }
+}

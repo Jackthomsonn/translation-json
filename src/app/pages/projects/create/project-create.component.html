@@ -1,0 +1,19 @@
+<div>
+  <label>Project name</label>
+  <input type='text' [(ngModel)]="project.name" />
+</div>
+
+<div>
+  <label>Project base locale</label>
+  <app-select [options]="locales"
+              [multiple]="false"
+              text="Choose a base locale for this project"
+              (chosenLocales)="setBaseLocale($event)"></app-select>
+</div>
+
+<div class='button-container'>
+  <app-button (click)="createProject()">
+    Create project
+    <i class='material-icons'>done</i>
+  </app-button>
+</div>

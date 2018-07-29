@@ -1,0 +1,15 @@
+<div class="button-container">
+  <app-button [routerLink]="['create']">
+    New project
+    <i class="material-icons">add_box</i>
+  </app-button>
+</div>
+
+<app-project-item [project]="project"
+                  *ngFor="let project of projects"
+                  [routerLink]="project.status !== 'IN_PROGRESS' ? [project._id] : []">
+</app-project-item>
+
+<div *ngIf="!projects?.length" class='first-time'>
+  <h2>Your team currently has no projects. Add one!</h2>
+</div>

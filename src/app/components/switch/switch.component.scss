@@ -1,0 +1,45 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  & > .select {
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    margin-right: $base-margin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid map-get($colors, border-color);
+    
+    & > i {
+      color: white(1);
+      font-size: map-get($fonts, small);
+    }
+  }
+
+  &.selected {
+
+    & > .select {
+      border: none;
+      background: map-get($colors, primary);
+      border-radius: 100%;
+      width: 20px;
+      height: 20px;
+      margin-right: $base-margin;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      
+      & > i {
+        color: white(1);
+        font-size: map-get($fonts, small);
+      }
+    }
+  }
+}

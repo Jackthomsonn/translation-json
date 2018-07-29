@@ -1,0 +1,26 @@
+@import '../../../globals';
+
+:host {
+
+  & > .select-container {
+    background: white(1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $base-padding * 2;
+    cursor: pointer;
+    box-shadow: 0 1px 5px map-get($colors, border-color);
+  }
+
+  & > ul {
+    background: white(1);
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 1px 5px map-get($colors, border-color);
+
+    li {
+      list-style: none;
+      padding: $base-padding;
+    }
+  }
+}

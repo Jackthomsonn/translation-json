@@ -1,0 +1,17 @@
+<div class='content'>
+  <header>
+    <h1>{{ error?.statusText }}</h1>
+  </header>
+
+  <div class='body'>
+    <strong>What seems to be the problem sir?</strong>
+    {{ error?.error }}
+
+    <div>
+      <app-button (click)="closeDialog()">
+        Close
+        <i class='material-icons'>close</i>
+      </app-button>
+    </div>
+  </div>
+</div>

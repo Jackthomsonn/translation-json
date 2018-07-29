@@ -1,0 +1,29 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 115vw;
+  position: absolute;
+  z-index: 2;
+
+  & > .loader {
+    border-left: 4px solid map-get($colors, primary);
+    border-top: 4px solid map-get($colors, primary);
+    border-right: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    animation: cubic-bezier(0.680, -0.550, 0.265, 1.550) spin 1000ms infinite forwards;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

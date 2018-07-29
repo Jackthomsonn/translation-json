@@ -1,0 +1,41 @@
+@import '../../../globals.scss';
+
+:host {
+  @include base-component;
+
+  & > .form {
+    display: flex;
+    flex-flow: column nowrap;
+
+    textarea {
+      background: white(1);
+      box-shadow: 0 1px 5px map-get($colors, border-color);
+      border-radius: $border-radius;
+      border: 1px solid map-get($colors, border-color);
+      margin-top: $base-margin;
+      min-height: 400px;
+      max-width: 100%;
+      min-width: 100%;
+      padding: $base-padding * 2;
+      font-size: map-get($fonts, medium);
+    }
+
+    label {
+      margin-top: $base-margin;
+      font-weight: 500;
+      font-size: map-get($fonts, medium);
+    }
+
+    & > .button-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: $base-margin;
+
+      & > app-button {
+        &:not(:last-of-type) {
+          margin-right: $base-margin;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,53 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 115vw;
+  position: absolute;
+  z-index: 2;
+  background: black(0.5);
+
+  & > .content {
+    background: white(1);
+    max-width: 600px;
+    min-width: 600px;
+    width: auto;
+    height: auto;
+    border-radius: $border-radius;
+    box-shadow: 0 1px 20px black(0.1);
+
+    & > header {
+      display: flex;
+      background: map-get($colors, primary);
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+
+      & > h1 {
+        color: white(1);
+        padding: $base-padding * 2;
+      }
+    }
+
+    & > .body {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      height: 100%;
+      padding: $base-padding * 2;
+
+      & > div {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin-top: $base-margin;
+
+        > app-button {
+          height: 50px;
+        }
+      }
+    }
+  }
+}

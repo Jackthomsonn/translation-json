@@ -1,0 +1,41 @@
+@import '../../../../globals';
+
+:host {
+  @include base-component;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  & > div {
+    display: flex;
+    flex-flow: column wrap;
+    width: 50%;
+
+    & > input {
+      border: 1px solid map-get($colors, border-color);
+      background: white(1);
+      outline: none;
+      border-radius: $border-radius;
+      padding: $base-padding * 2;
+      color: map-get($colors, secondary);
+      font-size: map-get($fonts, large);
+      margin-bottom: $base-margin;
+      width: 100%;
+    }
+
+    & > label {
+      margin-bottom: $base-margin - 8;
+      font-weight: 500;
+    }
+
+    & > app-select {
+      margin-bottom: $base-margin;
+    }
+  }
+
+  & > .button-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+  }
+}

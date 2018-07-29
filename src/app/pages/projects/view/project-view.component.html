@@ -1,0 +1,20 @@
+<div class="button-container">
+  <app-button [routerLink]="['translator']">
+    Create translations
+    <i class='material-icons'>add_box</i>
+  </app-button>
+</div>
+
+<div *ngFor="let translation of project?.translations">
+  <div class="card" *ngFor="let locale of translation | keyvalue">
+    {{ project.baseLocale | localeTranslator: locales }} - {{ locale.key | localeTranslator: locales }}
+    <a [href]="download(locale.value)" [download]="locale.key.split('-').pop()">
+      <i class='material-icons'>cloud_download</i>
+    </a>
+  </div>
+</div>
+
+
+<div *ngIf="!project?.translations.length" class='first-time'>
+  <h2>This project currently has no translations. Add some!</h2>
+</div>

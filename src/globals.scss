@@ -1,0 +1,36 @@
+$colors:(
+  primary: #FF7E6D,
+  secondary: #264653,
+  border-color: #EEE
+);
+
+$statuses:(
+  positive: #72EA82,
+  neutral: #F9F568,
+  negative: #FF595E
+);
+
+$fonts:(
+  small: 12px,
+  medium: 14px,
+  large: 16px
+);
+
+$base-padding: 8px;
+$base-margin: 16px;
+$border-radius: 4px;
+
+@function black($alpha) {
+  @return rgba(0, 0, 0, $alpha);
+}
+
+@function white($alpha) {
+  @return rgba(255, 255, 255, $alpha);
+}
+
+@mixin base-component() {
+  display: flex;
+  padding: $base-padding * 4;
+  flex-flow: column nowrap;
+  flex: 5;
+}
