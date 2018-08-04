@@ -1,3 +1,5 @@
+import { IBreadcrumb } from './IBreadcrumb';
+
 export interface IHeaderOptions {
-  breadcrumbs: string[];
+  breadcrumbs: IBreadcrumb[];
 }

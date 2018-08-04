@@ -1,5 +1,5 @@
 import { IProject } from './../../interfaces/IProject';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-project-item',
@@ -7,12 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./project-item.component.scss']
 })
 
-export class ProjectItemComponent implements OnInit {
+export class ProjectItemComponent {
   @Input() project: IProject;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }

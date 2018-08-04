@@ -1,0 +1,27 @@
+<div class='login'>
+  <header>
+    <h1>Login</h1>
+    <p [routerLink]="['/register']">Register today!</p>
+  </header>
+
+  <div class='input-container'>
+    <label>Username</label>
+    <input type='text' [(ngModel)]="loginDetails.username">
+  </div>
+
+  <div class='input-container'>
+    <label>Password</label>
+    <input type='password' [(ngModel)]="loginDetails.password">
+  </div>
+
+  <div>
+    <app-button (click)="login()">
+      Login
+      <i class='material-icons'>lock</i>
+    </app-button>
+  </div>
+
+  <div>
+    <a [routerLink]="['/forgotten-password']">Forgotten Password?</a>
+  </div>
+</div>

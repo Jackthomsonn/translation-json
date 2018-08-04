@@ -1,0 +1,34 @@
+<div class='login'>
+  <h1>Register</h1>
+
+  <div class='input-container'>
+    <label>Username</label>
+    <input type='text' [(ngModel)]="loginDetails.username">
+  </div>
+
+  <div class='input-container'>
+    <label>Email</label>
+    <input type='text' [(ngModel)]="loginDetails.email">
+  </div>
+
+  <div class='input-container'>
+    <label>Phone Number</label>
+    <input type='text' [(ngModel)]="loginDetails.phoneNumber">
+  </div>
+
+  <div class='input-container'>
+    <label>Password</label>
+    <input type='password' [(ngModel)]="loginDetails.password">
+  </div>
+
+  <div>
+    <app-button (click)="register()">
+      Register
+      <i class='material-icons'>edit</i>
+    </app-button>
+  </div>
+
+  <div>
+    <a [routerLink]="['/login']">Have an account? Log in here</a>
+  </div>
+</div>

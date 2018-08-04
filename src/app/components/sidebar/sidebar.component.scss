@@ -1,14 +1,9 @@
 @import '../../../globals';
 
 :host {
-  height: 100vh;
-  display: flex;
   background: darken(map-get($colors, primary), 5%);
-  flex: 1 0 auto;
-  min-width: 300px;
-  max-width: 300px;
   box-shadow: 5px 0 20px map-get($colors, border-color);
-  position: sticky;
+  flex: 0 0 auto;
 
   & > ul {
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -8,6 +8,4 @@ import { Component, OnInit, HostBinding, Input } from '@angular/core';
 
 export class ButtonComponent {
   @HostBinding('class.secondary') @Input() isSecondary: boolean;
-
-  constructor() { }
 }

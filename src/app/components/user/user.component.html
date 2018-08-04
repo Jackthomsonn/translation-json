@@ -1,0 +1,22 @@
+<div class='avatar'>
+  {{ getFirstLetter() }}
+</div>
+
+<p>{{ user?.properties?.team?.name }}</p>
+
+<i class='material-icons'>
+  keyboard_arrow_down
+</i>
+
+<div class='box' *ngIf="shouldShowDropdown">
+  <ul>
+    <li class='item'>
+      Your profile
+      <i class='material-icons'>person</i>
+    </li>
+    <li class='item' (click)="logout()">
+      Log off
+      <i class='material-icons'>exit_to_app</i>
+    </li>
+  </ul>
+</div>

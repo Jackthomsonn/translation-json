@@ -2,14 +2,10 @@
 
 :host {
   @include base-component;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
 
   & > div {
     display: flex;
     flex-flow: column wrap;
-    width: 50%;
 
     & > input {
       border: 1px solid map-get($colors, border-color);

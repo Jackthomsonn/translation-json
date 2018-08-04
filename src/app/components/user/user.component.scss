@@ -1,0 +1,59 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white(0.1);
+  height: 100%;
+  width: auto;
+  padding-right: $base-padding * 2;
+  padding-left: $base-padding * 2;
+  cursor: pointer;
+
+  & > i, p {
+    color: white(0.9);
+    padding-left: $base-padding * 2;
+  }
+
+  & > .avatar {
+    background: darken(map-get($colors, primary), 5%);
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white(1);
+    text-transform: capitalize;
+  }
+
+  & > .box {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white(1);
+    transform: translateY(60px);
+    width: 200px;
+    background: map-get($colors, secondary);
+    border-radius: $border-radius;
+    transform: translateY(80px) translateX(-10px);
+
+    & > ul {
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        list-style: none;
+        padding: $base-padding * 2;
+        border-radius: $border-radius;
+        color: white(0.9);
+
+        &:not(:last-of-type) {
+          border-bottom: 1px solid darken(map-get($colors, secondary), 2%);
+        }
+      }
+    }
+  }
+}

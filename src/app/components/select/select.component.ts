@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@angular/core';
+import { Component, HostListener, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -6,22 +6,30 @@ import { Component, OnInit, HostListener, Input, Output, EventEmitter } from '@a
   styleUrls: ['./select.component.scss']
 })
 
-export class SelectComponent implements OnInit {
-  @Input() options: any[];
-  @Output() chosenLocales: EventEmitter<any> = new EventEmitter<any>();
-  @Input() multiple: boolean;
-  @Input() text: string;
+export class SelectComponent {
+  @Input()
+  public options: string[];
+
+  @Input()
+  public multiple: boolean;
+
+  @Input()
+  public text: string;
+
+  @Output()
+  public chosenLocales: EventEmitter<any> = new EventEmitter<any>();
+
   public shouldShowOptions: boolean;
-  public chosenLocalesList: any[] = [];
+  public chosenLocalesList: string[] = [];
 
   @HostListener('click', ['$event'])
-  onClick(event) {
+  public onClick(event) {
     if (event.target.className === 'select-container') {
       this.shouldShowOptions = !this.shouldShowOptions;
     }
   }
 
-  public addOption = (option: any) => {
+  public addOption = (option: string) => {
     if (!this.multiple) {
       this.chosenLocalesList = [];
     }
@@ -36,12 +44,7 @@ export class SelectComponent implements OnInit {
     this.chosenLocales.next(this.chosenLocalesList);
   }
 
-  public isSelected = (option: any) => {
+  public isSelected = (option: string) => {
     return this.chosenLocalesList.includes(option);
-  }
-
-  constructor() { }
-
-  ngOnInit() {
   }
 }

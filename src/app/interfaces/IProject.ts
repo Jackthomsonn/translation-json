@@ -1,3 +1,4 @@
+import { ITeamLink } from './ITeamLink';
 import { ITranslation } from './ITranslation';
 export interface IProject {
   _id?: string;
@@ -5,4 +6,5 @@ export interface IProject {
   baseLocale: string;
   translations: ITranslation[];
   status: string;
+  team: ITeamLink;
 }

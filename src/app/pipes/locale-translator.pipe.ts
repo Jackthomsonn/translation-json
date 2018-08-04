@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class LocaleTranslatorPipe implements PipeTransform {
-  transform(value: any, args?: any): any {
+  transform(value: string, args?: { [key: string]: any }): string {
     for (const key in args.langs) {
       if (key === value.split('-').pop()) {
         return args.langs[key];

@@ -5,5 +5,10 @@
 }
 
 html, body {
-  background: #F9F9F9;
+  background: #F6FDFF;
+
+  & > .wrapper {
+    display: flex;
+    min-height: 100%;
+  }
 }

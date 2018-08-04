@@ -5,12 +5,13 @@
   display: flex;
   width: 100vw;
   align-items: center;
+  justify-content: space-between;
   z-index: 2;
 
   & > h1 {
     background: darken(map-get($colors, primary), 5%);
     font-size: map-get($fonts, large);
-    padding: $base-padding * 2;
+    padding: $base-padding * 3;
     width: 300px;
     color: rgba(255, 255, 255, 0.9);
   }

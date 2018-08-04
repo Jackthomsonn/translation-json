@@ -1,3 +1,4 @@
+import { ITranslation } from './../../interfaces/ITranslation';
 import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class TranslateService {
   constructor(private http: HttpClient) { }
 
-  public translate = (data: any) => {
-    return this.http.post('http://localhost:8080/translate', data);
+  public translate = (data: ITranslation) => {
+    return this.http.post('http://localhost:8080/api/translate', data);
   }
 }

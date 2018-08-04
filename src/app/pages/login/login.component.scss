@@ -1,0 +1,73 @@
+@import '../../../globals';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  & > .login {
+    display: flex;
+    flex-flow: column wrap;
+    width: 400px;
+    padding: $base-padding * 2;
+    border-radius: $border-radius;
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $base-margin;
+
+      p {
+        color: map-get($colors, primary);
+        font-weight: 700;
+        border: 1px solid map-get($colors, primary);
+        padding: $base-padding;
+        border-radius: $border-radius;
+        cursor: pointer;
+      }
+    }
+
+    & > .input-container {
+      display: flex;
+      flex-flow: column wrap;
+
+      &:not(:last-of-type) {
+        margin-bottom: $base-margin;
+      }
+
+      & > label {
+        font-weight: 700;
+        padding-bottom: $base-padding;
+      }
+
+      & > input {
+        border: 1px solid map-get($colors, border-color);
+      background: white(1);
+      outline: none;
+      border-radius: $border-radius;
+      padding: $base-padding * 2;
+      color: map-get($colors, secondary);
+      font-size: map-get($fonts, large);
+      margin-bottom: $base-margin;
+      width: 100%;
+      }
+    }
+
+    & > div {
+      display: flex;
+      justify-content: flex-end;
+
+      & > a {
+        margin-top: $base-margin;
+        color: map-get($colors, primary);
+        font-weight: 500;
+        font-style: italic;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+  }
+}

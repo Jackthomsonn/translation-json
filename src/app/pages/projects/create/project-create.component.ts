@@ -1,3 +1,5 @@
+import { UserService } from './../../../services/user/user.service';
+import { takeUntil } from 'rxjs/internal/operators';
 import { LoadingService } from './../../../services/loading/loading.service';
 import { LanguageService } from './../../../services/language/language.service';
 import { IProject } from './../../../interfaces/IProject';
@@ -6,6 +8,7 @@ import { HeaderService } from '../../../services/header/header.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ILocale } from '../../../interfaces/ILocale';
+import { BaseComponent } from '../../../components/base.component';
 
 @Component({
   selector: 'app-project-create',
@@ -13,13 +16,8 @@ import { ILocale } from '../../../interfaces/ILocale';
   styleUrls: ['./project-create.component.scss']
 })
 
-export class ProjectCreateComponent implements OnInit {
-  public project: IProject = {
-    name: undefined,
-    baseLocale: undefined,
-    translations: [],
-    status: undefined
-  };
+export class ProjectCreateComponent extends BaseComponent implements OnInit {
+  public project: IProject;
   public locales: string[] = [];
 
   constructor(
@@ -27,10 +25,13 @@ export class ProjectCreateComponent implements OnInit {
     private projectService: ProjectService,
     private languageService: LanguageService,
     private loadingService: LoadingService,
-    private router: Router) { }
+    private userService: UserService,
+    private router: Router) {
+    super();
+  }
 
   public createProject = () => {
-    this.projectService.createProject(this.project).subscribe(() => {
+    this.projectService.createProject(this.project).pipe(takeUntil(this.destroyed$)).subscribe(() => {
       this.router.navigate(['projects']);
     });
   }
@@ -42,7 +43,7 @@ export class ProjectCreateComponent implements OnInit {
   private getLanguages = () => {
     this.loadingService.isLoading.next(true);
 
-    this.languageService.getLanguages().subscribe((locales: ILocale) => {
+    this.languageService.getLanguages().pipe(takeUntil(this.destroyed$)).subscribe((locales: ILocale) => {
       locales.dirs.forEach(locale => {
         if (!this.locales.includes(locale.split('-').pop())) {
           this.locales.push(locale.split('-').pop());
@@ -62,6 +63,22 @@ export class ProjectCreateComponent implements OnInit {
         name: 'Create',
         sref: 'projects/create'
       }]
+    });
+
+    this.project = {
+      name: undefined,
+      baseLocale: undefined,
+      translations: [],
+      status: undefined,
+      team: undefined
+    };
+
+    this.userService.userInformation.pipe(takeUntil(this.destroyed$)).subscribe(user => {
+      if (!user) {
+        return;
+      }
+
+      this.project.team = user.properties.team;
     });
 
     this.getLanguages();

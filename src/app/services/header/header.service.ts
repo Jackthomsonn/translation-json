@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
+import { IHeaderOptions } from '../../interfaces/IHeaderOptions';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class HeaderService {
-  public setup: Subject<any> = new Subject<any>();
+  public setup: BehaviorSubject<any> = new BehaviorSubject<IHeaderOptions>(undefined);
 
   constructor() { }
 }

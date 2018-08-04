@@ -52,5 +52,4 @@ export class StatusComponent implements OnInit {
   ngOnInit() {
     this.checkStatus();
   }
-
 }

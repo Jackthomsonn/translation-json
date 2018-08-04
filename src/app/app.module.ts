@@ -1,3 +1,6 @@
+import { IsAuthorised } from './interceptors/is-authorised';
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { ForgottenPasswordComponent } from './pages/forgotten-password/forgotten-password.component';
 import { ErrorComponent } from './components/error/error.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs/breadcrumbs.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -23,7 +26,12 @@ import { ProjectsComponent } from './pages/projects/list/projects.component';
 import { ProjectCreateComponent } from './pages/projects/create/project-create.component';
 import { ProjectViewComponent } from './pages/projects/view/project-view.component';
 import { LocaleTranslatorPipe } from './pipes/locale-translator.pipe';
-import { RequestInterceptor } from './interceptor';
+import { RequestInterceptor } from './interceptors/interceptor';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+
+import { CookieService } from 'ngx-cookie-service';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +50,12 @@ import { RequestInterceptor } from './interceptor';
     LocaleTranslatorPipe,
     LoadingComponent,
     BreadcrumbsComponent,
-    ErrorComponent
+    ErrorComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
+    ForgottenPasswordComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +69,7 @@ import { RequestInterceptor } from './interceptor';
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptor,
     multi: true
-  }],
+  }, CookieService, IsAuthorised],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

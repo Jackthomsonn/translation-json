@@ -1,9 +1,13 @@
+import { UserService } from './../../../services/user/user.service';
+import { takeUntil } from 'rxjs/internal/operators';
 import { SocketService } from './../../../services/socket/socket.service';
 import { LoadingService } from './../../../services/loading/loading.service';
 import { IProject } from './../../../interfaces/IProject';
 import { ProjectService } from '../../../services/project/project.service';
 import { HeaderService } from '../../../services/header/header.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BaseComponent } from '../../../components/base.component';
+import { IUser } from '../../../interfaces/IUser';
 
 @Component({
   selector: 'app-proejcts',
@@ -11,14 +15,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./projects.component.scss']
 })
 
-export class ProjectsComponent implements OnInit, OnDestroy {
+export class ProjectsComponent extends BaseComponent implements OnInit, OnDestroy {
   public projects: IProject[];
 
   constructor(
     private headerService: HeaderService,
     private projectService: ProjectService,
     private loadingService: LoadingService,
-    private socketService: SocketService) { }
+    private socketService: SocketService,
+    private userService: UserService
+  ) {
+    super();
+  }
 
   private getProjects = (shouldShowLoader: boolean) => {
     if (!shouldShowLoader) {
@@ -27,10 +35,23 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       this.loadingService.isLoading.next(true);
     }
 
-    this.projectService.getProjects().subscribe((projects: IProject[]) => {
-      this.projects = projects;
+    this.userService.userInformation.pipe(takeUntil(this.destroyed$)).subscribe((user: IUser) => {
+      if (!user) {
+        return;
+      }
 
-      this.loadingService.isLoading.next(false);
+      if (!user.properties.team) {
+        this.loadingService.isLoading.next(false);
+      } else {
+        this.projectService
+          .getProjects(`team.link=${user.properties.team.link}`)
+          .pipe(takeUntil(this.destroyed$))
+          .subscribe((projects: IProject[]) => {
+            this.projects = projects;
+
+            this.loadingService.isLoading.next(false);
+          });
+      }
     });
   }
 
@@ -41,7 +62,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       }]
     });
 
-    this.socketService.on('notification', (data: any) => {
+    this.socketService.on('notification', () => {
       this.getProjects(false);
     });
 
@@ -49,6 +70,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
     this.socketService.remove('notification');
   }
 }

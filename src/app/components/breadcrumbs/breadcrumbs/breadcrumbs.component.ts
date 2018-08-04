@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { IBreadcrumb } from './../../../interfaces/IBreadcrumb';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -6,12 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./breadcrumbs.component.scss']
 })
 
-export class BreadcrumbsComponent implements OnInit {
-  @Input() breadcrumbs: any[];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class BreadcrumbsComponent {
+  @Input() breadcrumbs: IBreadcrumb[];
 }

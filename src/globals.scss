@@ -1,5 +1,5 @@
 $colors:(
-  primary: #FF7E6D,
+  primary: #449DD1,
   secondary: #264653,
   border-color: #EEE
 );
@@ -29,8 +29,8 @@ $border-radius: 4px;
 }
 
 @mixin base-component() {
-  display: flex;
   padding: $base-padding * 4;
-  flex-flow: column nowrap;
-  flex: 5;
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 100vh;
 }

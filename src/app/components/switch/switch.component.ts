@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostListener, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Component, Input, HostListener, HostBinding, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-switch',
@@ -6,22 +6,16 @@ import { Component, OnInit, Input, HostListener, HostBinding, Output, EventEmitt
   styleUrls: ['./switch.component.scss']
 })
 
-export class SwitchComponent implements OnInit {
+export class SwitchComponent {
   @Input() option: string;
 
   @Output() chosenOption: EventEmitter<string> = new EventEmitter<string>();
 
-  @HostBinding('class.selected')
-  @Input() isSelected: boolean;
+  @HostBinding('class.selected') @Input() isSelected: boolean;
 
-  @HostListener('click') detectClick() {
+  @HostListener('click')
+  public onClick() {
     this.isSelected = !this.isSelected;
     this.chosenOption.next(this.option);
   }
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
 }
