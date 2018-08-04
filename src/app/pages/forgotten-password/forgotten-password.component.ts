@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/internal/operators';
 import { LoadingService } from './../../services/loading/loading.service';
 import { AuthenticationService } from './../../services/authentication/authentication.service';
@@ -15,14 +16,18 @@ export class ForgottenPasswordComponent extends BaseComponent {
     email: undefined
   };
 
-  constructor(private authenticationService: AuthenticationService, private loadingService: LoadingService) {
+  constructor(
+    private authenticationService: AuthenticationService,
+    private loadingService: LoadingService,
+    private router: Router) {
     super();
   }
 
-  public getNewPassword = () => {
+  public setNewPassword = () => {
     this.loadingService.isLoading.next(true);
 
-    this.authenticationService.resetPassword(this.loginDetails.email).pipe(takeUntil(this.destroyed$)).subscribe(() => {
+    this.authenticationService.resetPassword(this.loginDetails).pipe(takeUntil(this.destroyed$)).subscribe(() => {
+      this.router.navigate(['login']);
       this.loadingService.isLoading.next(false);
     });
   }

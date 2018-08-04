@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
@@ -28,10 +28,14 @@ export class AuthenticationService {
     return this.http.post('http://localhost:8080/api/auth/reset-password-request', { email });
   }
 
-  public updatePassword = (user: IUser) => {
+  public updatePassword = (user: IUser, token: string) => {
     const { email, password } = user;
 
-    return this.http.post('http://localhost:8080/api/auth/update-password', { email, password });
+    return this.http.post('http://localhost:8080/api/auth/update-password', { email, password }, {
+      headers: new HttpHeaders({
+        authorization: `Bearer ${token}`
+      })
+    });
   }
 
   public changePassword = (user: IUser) => {

@@ -47,9 +47,11 @@ export class RequestInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    request = request.clone({
-      headers: request.headers.set('Authorization', `Bearer ${this.authenticationService.getToken()}`)
-    });
+    if (!request.url.includes('update-password')) {
+      request = request.clone({
+        headers: request.headers.set('Authorization', `Bearer ${this.authenticationService.getToken()}`)
+      });
+    }
 
     return next.handle(request).pipe(catchError(error => {
       if (this.isAuthError(error)) {

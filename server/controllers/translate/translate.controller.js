@@ -5,11 +5,11 @@ const { BadRequest } = require('dynamic-route-generator')
 
 const TranslateController = (req, res, next) => {
   if (!validateJson(req.body.json)) {
-    next(new BadRequest('You have supplied invalid JSON. Please check and try again'))
+    return next(new BadRequest('You have supplied invalid JSON. Please check and try again'))
   }
 
   if (req.body.chosenLocales.length === 0) {
-    next(new BadRequest('You must select at least one target locale you wish to translate to'))
+    return next(new BadRequest('You must select at least one target locale you wish to translate to'))
   }
 
   let count = 0

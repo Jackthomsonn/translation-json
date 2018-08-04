@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/internal/operators';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LoadingService } from '../../services/loading/loading.service';
 import { AuthenticationService } from '../../services/authentication/authentication.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,16 +20,21 @@ export class ChangePasswordComponent extends BaseComponent implements OnInit {
   constructor(
     private authenticationService: AuthenticationService,
     private loadingService: LoadingService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
     super();
   }
 
   public resetPassword = () => {
     this.loadingService.isLoading.next(true);
 
-    this.authenticationService.updatePassword(this.details).pipe(takeUntil(this.destroyed$)).subscribe(() => {
-      this.loadingService.isLoading.next(false);
-    });
+    this.authenticationService
+      .updatePassword(this.details, this.route.snapshot.queryParams.token)
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe(() => {
+        this.loadingService.isLoading.next(false);
+        this.router.navigate(['login']);
+      });
   }
 
   ngOnInit() {
