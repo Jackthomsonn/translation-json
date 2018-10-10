@@ -15,23 +15,23 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) { }
 
   public login = (user: IUser) => {
-    return this.http.post('http://localhost:8080/api/auth/login', user);
+    return this.http.post('api/auth/login', user);
   }
 
   public register = (user: IUser) => {
-    return this.http.post('http://localhost:8080/api/auth/register', user);
+    return this.http.post('api/auth/register', user);
   }
 
   public resetPassword = (user: IUser) => {
     const { email } = user;
 
-    return this.http.post('http://localhost:8080/api/auth/reset-password-request', { email });
+    return this.http.post('api/auth/reset-password-request', { email });
   }
 
   public updatePassword = (user: IUser, token: string) => {
     const { email, password } = user;
 
-    return this.http.post('http://localhost:8080/api/auth/update-password', { email, password }, {
+    return this.http.post('api/auth/update-password', { email, password }, {
       headers: new HttpHeaders({
         authorization: `Bearer ${token}`
       })
@@ -39,7 +39,7 @@ export class AuthenticationService {
   }
 
   public changePassword = (user: IUser) => {
-    return this.http.post('http://localhost:8080/api/auth/change-password', user);
+    return this.http.post('api/auth/change-password', user);
   }
 
   public logout = () => {
@@ -53,6 +53,6 @@ export class AuthenticationService {
   }
 
   public getRefreshToken = () => {
-    return this.http.post('http://localhost:8080/api/auth/refreshtoken', { token: this.getToken() });
+    return this.http.post('api/auth/refreshtoken', { token: this.getToken() });
   }
 }

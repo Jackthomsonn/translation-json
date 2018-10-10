@@ -12,6 +12,6 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   public getUserInformation = () => {
-    return this.http.get('http://localhost:8080/api/user');
+    return this.http.get('api/user');
   }
 }

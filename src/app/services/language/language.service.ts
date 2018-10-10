@@ -18,6 +18,6 @@ export class LanguageService {
       data = 'https://translate.yandex.net/api/v1.5/tr.json/getLangs?';
     }
 
-    return this.http.post('http://localhost:8080/api/languages', { url: data });
+    return this.http.post('api/languages', { url: data });
   }
 }

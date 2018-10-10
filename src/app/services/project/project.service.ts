@@ -11,14 +11,14 @@ export class ProjectService {
   constructor(private http: HttpClient) { }
 
   public getProjects = () => {
-    return this.http.get(`http://localhost:8080/api/projects`);
+    return this.http.get(`api/projects`);
   }
 
   public getProject = (projectId: string) => {
-    return this.http.get(`http://localhost:8080/api/projects/${projectId}`);
+    return this.http.get(`api/projects/${projectId}`);
   }
 
   public createProject = (project: IProject) => {
-    return this.http.post('http://localhost:8080/api/projects', project);
+    return this.http.post('api/projects', project);
   }
 }
