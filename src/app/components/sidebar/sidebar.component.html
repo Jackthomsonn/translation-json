@@ -4,7 +4,7 @@
     Projects
   </li>
 
-  <li [routerLink]="['team/create']" routerLinkActive="selected">
+  <li [routerLink]="['team/create']" routerLinkActive="selected" *ngIf="isAdmin">
     <i class='material-icons'>people</i>
     Create a team
   </li>

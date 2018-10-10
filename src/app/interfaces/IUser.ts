@@ -10,4 +10,5 @@ export interface IUser {
   properties?: {
     team: ITeamLink
   };
+  permissions?: any[];
 }

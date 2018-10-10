@@ -23,8 +23,8 @@ export class RegisterComponent extends BaseComponent {
     teamId: undefined,
     properties: {
       team: {
-        name: undefined,
-        link: undefined
+        name: 'Global Team',
+        link: '/teams/5bbe463721bae84a28f10051'
       }
     }
   };
