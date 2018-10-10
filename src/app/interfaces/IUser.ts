@@ -5,6 +5,7 @@ export interface IUser {
   password?: string;
   email?: string;
   phoneNumber?: number;
+  teamId?: string;
   twoFactorAuthEnabled?: boolean;
   properties?: {
     team: ITeamLink

@@ -2,6 +2,7 @@ const ProjectModel = require('../models/project/project.model')
 const TranslateModel = require('../models/tranlsate/translate.model')
 const LanguageModel = require('../models/language/language.model')
 const UserModel = require('../models/user/user.model')
+const TeamModel = require('../models/team/team.model')
 
 const ProjectController = require('../controllers/project/project.controller')
 const TranslateController = require('../controllers/translate/translate.controller')
@@ -19,6 +20,15 @@ const routes = [{
   }, {
     name: 'post',
     handlers: [CheckAuthentication, ProjectController],
+  }]
+}, {
+  uri: '/teams',
+  model: TeamModel,
+  methods: [{
+    name: 'get'
+  }, {
+    name: 'post',
+    handlers: [CheckAuthentication]
   }]
 }, {
   uri: '/translate',

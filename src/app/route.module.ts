@@ -9,6 +9,7 @@ import { ProjectCreateComponent } from './pages/projects/create/project-create.c
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { IsAuthorised } from './interceptors/is-authorised';
+import { TeamCreateComponent } from './pages/team/create/team-create.component';
 
 export const AppRoutes: Routes = [
   { path: '', redirectTo: '/projects', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const AppRoutes: Routes = [
   { path: 'projects/create', component: ProjectCreateComponent, canActivate: [IsAuthorised] },
   { path: 'projects/:projectId', component: ProjectViewComponent, canActivate: [IsAuthorised] },
   { path: 'projects/:projectId/translator', component: TranslatorComponent, canActivate: [IsAuthorised] },
+  { path: 'team/create', component: TeamCreateComponent, canActivate: [IsAuthorised] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgotten-password', component: ForgottenPasswordComponent },

@@ -5,7 +5,6 @@ const { BadRequest, InternalServerError } = require('dynamic-route-generator')
 
 const ProjectController = (req, res, next) => {
   const token = req.headers.authorization.split(' ').pop()
-
   const decodedToken = jwt.decode(token)
 
   if (req.method === 'POST') {
@@ -25,25 +24,26 @@ const ProjectController = (req, res, next) => {
   }
 
   if (req.method === 'GET') {
-    if (req.query.q) {
-      let prop = req.query.q.split('=').shift()
-      let value = req.query.q.split('=').pop()
+    if (req.params.id) {
+      projectModel.findOne({ 'team.link': decodedToken.data.properties.team.link, _id: req.params.id }, (err, doc) => {
+        if (err) {
+          return next(new InternalServerError())
+        }
 
-      if (value !== decodedToken.data.properties.team.link) {
-        return next(new BadRequest('You are not authorised to view this teams projects'))
-      }
-
-      projectModel.find({ [prop]: value }, (err, docs) => {
+        if (doc) {
+          res.status(200).send(doc)
+        } else {
+          res.status(200).send({})
+        }
+      })
+    } else {
+      projectModel.find({ 'team.link': decodedToken.data.properties.team.link }, (err, docs) => {
         if (err) {
           next(new InternalServerError())
         }
 
         res.status(200).send(docs)
       })
-    } else if (req.params.id) {
-      next()
-    } else {
-      next(new BadRequest('You must be associated with a team to see projects'))
     }
   }
 }

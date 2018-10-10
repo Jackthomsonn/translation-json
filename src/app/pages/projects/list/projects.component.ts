@@ -10,13 +10,14 @@ import { BaseComponent } from '../../../components/base.component';
 import { IUser } from '../../../interfaces/IUser';
 
 @Component({
-  selector: 'app-proejcts',
+  selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss']
 })
 
 export class ProjectsComponent extends BaseComponent implements OnInit, OnDestroy {
   public projects: IProject[];
+  public isPartOfATeam: boolean;
 
   constructor(
     private headerService: HeaderService,
@@ -42,9 +43,12 @@ export class ProjectsComponent extends BaseComponent implements OnInit, OnDestro
 
       if (!user.properties.team) {
         this.loadingService.isLoading.next(false);
+        this.isPartOfATeam = false;
       } else {
+        this.isPartOfATeam = true;
+
         this.projectService
-          .getProjects(`team.link=${user.properties.team.link}`)
+          .getProjects()
           .pipe(takeUntil(this.destroyed$))
           .subscribe((projects: IProject[]) => {
             this.projects = projects;

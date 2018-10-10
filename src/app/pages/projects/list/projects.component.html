@@ -1,5 +1,5 @@
 <div class="button-container">
-  <app-button [routerLink]="['create']">
+  <app-button [routerLink]="['create']" *ngIf="isPartOfATeam">
     New project
     <i class="material-icons">add_box</i>
   </app-button>
@@ -10,6 +10,11 @@
                   [routerLink]="project.status !== 'IN_PROGRESS' ? [project._id] : []">
 </app-project-item>
 
-<div *ngIf="!projects?.length" class='first-time'>
+<div *ngIf="isPartOfATeam && !projects?.length" class='first-time'>
   <h2>Your team currently has no projects. Add one!</h2>
+</div>
+
+<div *ngIf="!isPartOfATeam" class='first-time'>
+  <h2>You are currently not part of a team</h2>
+  <p>In order to start using Translation JSON, you must first ask a team lead to assign you to a team</p>
 </div>

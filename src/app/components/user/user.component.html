@@ -2,7 +2,7 @@
   {{ getFirstLetter() }}
 </div>
 
-<p>{{ user?.properties?.team?.name }}</p>
+<p>{{ user?.properties?.team?.name ? user?.properties?.team?.name : 'No team assigned' }}</p>
 
 <i class='material-icons'>
   keyboard_arrow_down

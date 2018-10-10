@@ -1,3 +1,4 @@
+import { UserService } from './../../../services/user/user.service';
 import { takeUntil } from 'rxjs/internal/operators';
 import { LoadingService } from './../../../services/loading/loading.service';
 import { ILocale } from './../../../interfaces/ILocale';
@@ -9,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '../../../../../node_modules/@angular/platform-browser';
 import { BaseComponent } from '../../../components/base.component';
+import { IUser } from '../../../interfaces/IUser';
 
 @Component({
   selector: 'app-project-view',
@@ -28,7 +30,8 @@ export class ProjectViewComponent extends BaseComponent implements OnInit {
     private languageService: LanguageService,
     private headerService: HeaderService,
     private loadingService: LoadingService,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    private userService: UserService) {
     super();
   }
 
@@ -53,24 +56,30 @@ export class ProjectViewComponent extends BaseComponent implements OnInit {
   private getProjects = () => {
     this.loadingService.isLoading.next(true);
 
-    this.projectService
-      .getProject(this.route.snapshot.params.projectId)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((project: IProject) => {
-        this.project = project;
+    this.userService.userInformation.pipe(takeUntil(this.destroyed$)).subscribe((user: IUser) => {
+      if (!user) {
+        return;
+      }
 
-        this.headerService.setup.next({
-          breadcrumbs: [{
-            name: 'Projects',
-            sref: 'projects'
-          }, {
-            name: this.project.name,
-            sref: `projects/${this.project._id}`
-          }]
+      this.projectService
+        .getProject(this.route.snapshot.params.projectId)
+        .pipe(takeUntil(this.destroyed$))
+        .subscribe((project: IProject) => {
+          this.project = project;
+
+          this.headerService.setup.next({
+            breadcrumbs: [{
+              name: 'Projects',
+              sref: 'projects'
+            }, {
+              name: this.project.name,
+              sref: `projects/${this.project._id}`
+            }]
+          });
+
+          this.getLanguages();
         });
-
-        this.getLanguages();
-      });
+    });
   }
 
   ngOnInit() {

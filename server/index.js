@@ -1,26 +1,27 @@
 const mongoose = require('mongoose')
-const { RouteGenerator } = require('dynamic-route-generator')
 const cors = require('cors')
 const bodyparser = require('body-parser')
 const notificationEmitter = require('./services/notification/notification.service')
 const routes = require('./routes/routes.model')
-const { XAuth } = require('x-auth-plugin')
 const express = require('express')
 const path = require('path')
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
-const mongo_uri = process.env.NODE_ENV == 'production' ? process.env.MONGO_URI : 'mongodb://localhost:27017/test'
+const { RouteGenerator } = require('dynamic-route-generator')
+const { XAuth } = require('x-auth-plugin')
+
+const mongo_uri = process.env.MONGO_URI ? process.env.MONGO_URI : 'mongodb://localhost:27017/test'
 
 app.disable('etag')
 app.use(cors())
 
 app.use(bodyparser.json())
 
-app.use(express.static(path.join(__dirname, '..', '..', 'Translate', 'dist', 'translate')))
+app.use(express.static(path.join(__dirname, '..', 'dist', 'translate')))
 
-mongoose.connect(mongo_uri, { useNewUrlParser: true })
+mongoose.connect(mongo_uri, { useNewUrlParser: true }).catch(console.log)
 
 XAuth.setupProps({
   appName: 'Translation JSON',
@@ -50,7 +51,7 @@ new RouteGenerator({
   }
 })
 
-app.get('*/', (req, res) => res.sendFile(path.join(__dirname, '..', '..', 'Translate', 'dist', 'translate', 'index.html')))
+app.get('*/', (req, res) => res.sendFile(path.join(__dirname, '..', 'dist', 'translate', 'index.html')))
 
 io.on('connection', (socket) => {
   notificationEmitter.setMaxListeners(0)

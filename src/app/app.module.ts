@@ -32,6 +32,7 @@ import { RegisterComponent } from './pages/register/register.component';
 
 import { CookieService } from 'ngx-cookie-service';
 import { UserComponent } from './components/user/user.component';
+import { TeamCreateComponent } from './pages/team/create/team-create.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { UserComponent } from './components/user/user.component';
     RegisterComponent,
     UserComponent,
     ForgottenPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    TeamCreateComponent
   ],
   imports: [
     BrowserModule,

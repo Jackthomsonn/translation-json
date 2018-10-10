@@ -19,6 +19,7 @@
     box-shadow: 0 1px 5px map-get($colors, border-color);
     background: #FFF;
     border-radius: $border-radius;
+    text-align: center;
 
     & > h2 {
       color: map-get($colors, primary);

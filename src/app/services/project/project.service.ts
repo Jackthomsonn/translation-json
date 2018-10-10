@@ -10,8 +10,8 @@ export class ProjectService {
 
   constructor(private http: HttpClient) { }
 
-  public getProjects = (query: string) => {
-    return this.http.get(`http://localhost:8080/api/projects?q=${query}`);
+  public getProjects = () => {
+    return this.http.get(`http://localhost:8080/api/projects`);
   }
 
   public getProject = (projectId: string) => {
