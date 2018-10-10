@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -7,11 +9,18 @@ import * as io from 'socket.io-client';
 
 export class SocketService {
   private socket: SocketIOClient.Socket;
+  private socketUri: string;
 
-  constructor() { }
+  constructor() {
+    if (environment.production) {
+      this.socketUri = 'https://translation-json.herokuapp.com/';
+    } else {
+      this.socketUri = 'http://localhost:8080';
+    }
+  }
 
   public connect = () => {
-    this.socket = io('http://localhost:8080');
+    this.socket = io(this.socketUri);
   }
 
   public emit = (eventName: string, data: any) => {
